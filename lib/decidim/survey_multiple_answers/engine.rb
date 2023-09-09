@@ -2,6 +2,7 @@
 
 require "rails"
 require "decidim/core"
+require "decidim/survey_multiple_answers/questionnaire"
 
 module Decidim
   module SurveyMultipleAnswers
@@ -15,8 +16,24 @@ module Decidim
         # root to: "survey_multiple_answers#index"
       end
 
-      initializer "SurveyMultipleAnswers.webpacker.assets_path" do
-        Decidim.register_assets_path File.expand_path("app/packs", root)
+      initializer "decidim_survey_multiple_answers.override" do |app|
+        app.config.to_prepare do
+          Decidim::Forms::Questionnaire.prepend Decidim::SurveyMultipleAnswers::Questionnaire
+        end
+      end
+
+      initializer "decidim_survey_multiple_answers.append_options" do |app|
+        app.config.to_prepare do
+
+          Decidim.find_component_manifest(:surveys).settings(:global) do |settings|
+            settings.attribute :allow_multiple_answers, type: :boolean, default: false
+          end
+
+          Decidim.find_component_manifest(:surveys).settings(:step) do |settings|
+            settings.attribute :allow_multiple_answers, type: :boolean, default: false
+          end
+
+        end
       end
     end
   end
