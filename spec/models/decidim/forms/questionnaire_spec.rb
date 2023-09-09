@@ -7,10 +7,6 @@ module Decidim
     describe Questionnaire do
       subject { questionnaire }
 
-      before do
-        # pp described_class.ancestors
-      end
-
       describe "#answered_by?" do
         let(:participatory_space) { create(:participatory_process, :with_steps) }
         let(:component) { create(:component, manifest_name: "surveys", participatory_space: participatory_space) }
@@ -47,15 +43,15 @@ module Decidim
 
           it "returns true if the the setting is disabled" do
             component.update!(step_settings: {
-              component.participatory_space.active_step.id => { allow_multiple_answers: false }
-            })
+                                component.participatory_space.active_step.id => { allow_multiple_answers: false }
+                              })
             expect(questionnaire).to be_answered_by(user)
           end
 
           it "returns false if the setting is disabled" do
             component.update!(step_settings: {
-              component.participatory_space.active_step.id => { allow_multiple_answers: true }
-            })
+                                component.participatory_space.active_step.id => { allow_multiple_answers: true }
+                              })
             expect(questionnaire).not_to be_answered_by(user)
           end
         end

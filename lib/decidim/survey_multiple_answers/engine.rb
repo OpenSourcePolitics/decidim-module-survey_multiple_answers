@@ -24,7 +24,6 @@ module Decidim
 
       initializer "decidim_survey_multiple_answers.append_options" do |app|
         app.config.to_prepare do
-
           Decidim.find_component_manifest(:surveys).settings(:global) do |settings|
             settings.attribute :allow_multiple_answers, type: :boolean, default: false
           end
@@ -32,7 +31,6 @@ module Decidim
           Decidim.find_component_manifest(:surveys).settings(:step) do |settings|
             settings.attribute :allow_multiple_answers, type: :boolean, default: false
           end
-
         end
       end
     end
