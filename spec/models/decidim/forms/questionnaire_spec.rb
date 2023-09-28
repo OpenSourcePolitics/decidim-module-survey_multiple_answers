@@ -33,7 +33,10 @@ module Decidim
           end
 
           it "returns false if the setting is disabled" do
-            component.update!(settings: { allow_multiple_answers: true })
+            component.update!(settings: { allow_multiple_answers: true },
+                              step_settings: {
+                                component.participatory_space.active_step.id => { allow_multiple_answers: true }
+                              })
             expect(questionnaire).not_to be_answered_by(user)
           end
         end
@@ -41,15 +44,25 @@ module Decidim
         context "when step settings of component allows multiple answers" do
           let!(:answer) { create(:answer, questionnaire: questionnaire, question: question, user: user) }
 
-          it "returns true if the the setting is disabled" do
-            component.update!(step_settings: {
+          it "returns true if the the step setting is disabled" do
+            component.update!(settings: { allow_multiple_answers: true },
+                              step_settings: {
                                 component.participatory_space.active_step.id => { allow_multiple_answers: false }
                               })
             expect(questionnaire).to be_answered_by(user)
           end
 
+          it "returns true if the the global setting is disabled" do
+            component.update!(settings: { allow_multiple_answers: false },
+                              step_settings: {
+                                component.participatory_space.active_step.id => { allow_multiple_answers: true }
+                              })
+            expect(questionnaire).to be_answered_by(user)
+          end
+
           it "returns false if the setting is disabled" do
-            component.update!(step_settings: {
+            component.update!(settings: { allow_multiple_answers: true },
+                              step_settings: {
                                 component.participatory_space.active_step.id => { allow_multiple_answers: true }
                               })
             expect(questionnaire).not_to be_answered_by(user)

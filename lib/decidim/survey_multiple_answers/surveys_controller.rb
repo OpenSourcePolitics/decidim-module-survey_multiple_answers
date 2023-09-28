@@ -10,10 +10,10 @@ module Decidim
       def self.prepended(base)
         base.class_eval do
           def allow_multiple_answers?
-            [
-              current_component.settings.try(:allow_multiple_answers?),
-              current_component.current_settings.try(:allow_multiple_answers?)
-            ].any?
+            permissions = [current_component.settings.try(:allow_multiple_answers?)]
+            permissions << current_component.current_settings.try(:allow_multiple_answers?) if current_component.participatory_space.allows_steps?
+
+            permissions.all?
           end
 
           # Public: return true if the current user (or session visitor) can answer the questionnaire
