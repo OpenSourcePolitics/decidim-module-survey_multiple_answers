@@ -3,6 +3,8 @@
 require "rails"
 require "decidim/core"
 require "decidim/survey_multiple_answers/questionnaire"
+require "decidim/survey_multiple_answers/surveys_controller"
+require "decidim/survey_multiple_answers/questionnaire_user_answers"
 
 module Decidim
   module SurveyMultipleAnswers
@@ -19,6 +21,10 @@ module Decidim
       initializer "decidim_survey_multiple_answers.override" do |app|
         app.config.to_prepare do
           Decidim::Forms::Questionnaire.prepend Decidim::SurveyMultipleAnswers::Questionnaire
+          Decidim::Forms::QuestionnaireUserAnswers.prepend Decidim::SurveyMultipleAnswers::QuestionnaireUserAnswers
+          ActiveSupport.on_load :action_controller do
+            Decidim::Surveys::SurveysController.prepend Decidim::SurveyMultipleAnswers::SurveysController
+          end
         end
       end
 

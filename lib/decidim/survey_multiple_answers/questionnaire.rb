@@ -17,7 +17,6 @@ module Decidim
             answers.where(query).any? if questions.present?
           end
 
-          private
           def allow_multiple_answers?
             return false unless has_component?
 
@@ -26,6 +25,8 @@ module Decidim
               questionnaire_for.component.current_settings.try(:allow_multiple_answers?)
             ].any?
           end
+
+          private
 
           def has_component?
             questionnaire_for.respond_to? :component
