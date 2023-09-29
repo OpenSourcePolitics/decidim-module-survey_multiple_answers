@@ -1,14 +1,14 @@
 ---
-de-CH:
+de:
   decidim:
     components:
       survey_multiple_answers:
-        name: UmfrageMehrereAntworten
+        name: UmfrageMultiple-Antworten
       surveys:
         settings:
           global:
-            allow_multiple_answers: Erlauben Sie mehrere Antworten
+            allow_multiple_answers: Mehrere Antworten zulassen
             allow_multiple_answers_help: Wenn aktiviert, kann ein Benutzer die Umfrage mehrmals beantworten. Dies kann zu schlechten oder unzuverlässigen Daten führen und die Daten werden anfälliger für automatisierte Angriffe. Mit Vorsicht verwenden!
           step:
-            allow_multiple_answers: Erlauben Sie mehrere Antworten
+            allow_multiple_answers: Mehrere Antworten zulassen
             allow_multiple_answers_help: Wenn aktiviert, kann ein Benutzer die Umfrage mehrmals beantworten. Dies kann zu schlechten oder unzuverlässigen Daten führen und die Daten werden anfälliger für automatisierte Angriffe. Mit Vorsicht verwenden!
