@@ -3,12 +3,12 @@ lt:
   decidim:
     components:
       survey_multiple_answers:
-        name: SurveyMultipleAnswers
+        name: Daugiau nei vienas atsakymas
       surveys:
         settings:
           global:
-            allow_multiple_answers: Allow multiple answers
-            allow_multiple_answers_help: If active, a user will be able to answer the survey multiple times. This may lead to poor or unreliable data and it will be more vulnerable to automated attacks. Use with caution!
+            allow_multiple_answers: Leisti daugiau nei vieną atsakymą
+            allow_multiple_answers_help: Jei aktyvuota, leidžia kiekvienam naudotojui pateikti keletą atsakymų!
           step:
-            allow_multiple_answers: Allow multiple answers
-            allow_multiple_answers_help: If active, a user will be able to answer the survey multiple times. This may lead to poor or unreliable data and it will be more vulnerable to automated attacks. Use with caution!
+            allow_multiple_answers: Leisti daugiau nei vieną atsakymą
+            allow_multiple_answers_help: Jei aktyvuota, leidžia kiekvienam naudotojui pateikti keletą atsakymų!
