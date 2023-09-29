@@ -1,0 +1,14 @@
+---
+fr:
+  decidim:
+    components:
+      survey_multiple_answers:
+        name: Réponses multiples
+      surveys:
+        settings:
+          global:
+            allow_multiple_answers: Autoriser plusieurs réponses
+            allow_multiple_answers_help: Si activé, un utilisateur sera en mesure de répondre à l'enquête plusieurs fois. Cela peut conduire à des données peu fiables et sera plus vulnérable aux attaques automatisées. À utiliser avec précaution!
+          step:
+            allow_multiple_answers: Autoriser plusieurs réponses
+            allow_multiple_answers_help: Si activé, un utilisateur sera en mesure de répondre à l'enquête plusieurs fois. Cela peut conduire à des données peu fiables et sera plus vulnérable aux attaques automatisées. À utiliser avec précaution!

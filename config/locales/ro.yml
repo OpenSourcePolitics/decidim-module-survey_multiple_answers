@@ -1,0 +1,14 @@
+---
+ro:
+  decidim:
+    components:
+      survey_multiple_answers:
+        name: Răspunsuri multiple la chestionar
+      surveys:
+        settings:
+          global:
+            allow_multiple_answers: Permite răspunsuri multiple
+            allow_multiple_answers_help: Dacă este activ, un utilizator va putea răspunde de mai multe ori la chestionar. Acest lucru poate duce la date slab calitative și va fi mai vulnerabil la atacuri automate. Utilizați cu prudență!
+          step:
+            allow_multiple_answers: Permite răspunsuri multiple
+            allow_multiple_answers_help: Dacă este activ, un utilizator va putea răspunde de mai multe ori la chestionar. Acest lucru poate duce la date slab calitative și va fi mai vulnerabil la atacuri automate. Utilizați cu prudență!

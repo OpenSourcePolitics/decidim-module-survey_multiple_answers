@@ -1,0 +1,14 @@
+---
+lt:
+  decidim:
+    components:
+      survey_multiple_answers:
+        name: Daugiau nei vienas atsakymas
+      surveys:
+        settings:
+          global:
+            allow_multiple_answers: Leisti daugiau nei vieną atsakymą
+            allow_multiple_answers_help: Jei aktyvuota, leidžia kiekvienam naudotojui pateikti keletą atsakymų!
+          step:
+            allow_multiple_answers: Leisti daugiau nei vieną atsakymą
+            allow_multiple_answers_help: Jei aktyvuota, leidžia kiekvienam naudotojui pateikti keletą atsakymų!
