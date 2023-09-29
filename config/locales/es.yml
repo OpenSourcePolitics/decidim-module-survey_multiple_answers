@@ -1,0 +1,14 @@
+---
+es:
+  decidim:
+    components:
+      survey_multiple_answers:
+        name: SurveyMultipleAnswers
+      surveys:
+        settings:
+          global:
+            allow_multiple_answers: Allow multiple answers
+            allow_multiple_answers_help: If active, a user will be able to answer the survey multiple times. This may lead to poor or unreliable data and it will be more vulnerable to automated attacks. Use with caution!
+          step:
+            allow_multiple_answers: Allow multiple answers
+            allow_multiple_answers_help: If active, a user will be able to answer the survey multiple times. This may lead to poor or unreliable data and it will be more vulnerable to automated attacks. Use with caution!
