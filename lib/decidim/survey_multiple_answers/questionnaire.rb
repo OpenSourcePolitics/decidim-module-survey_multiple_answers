@@ -20,10 +20,10 @@ module Decidim
           def allow_multiple_answers?
             return false unless has_component?
 
-            [
-              questionnaire_for.component.settings.try(:allow_multiple_answers?),
-              questionnaire_for.component.current_settings.try(:allow_multiple_answers?)
-            ].any?
+            permissions = [questionnaire_for.component.settings.try(:allow_multiple_answers?)]
+            permissions << questionnaire_for.component.current_settings.try(:allow_multiple_answers?) if questionnaire_for.component.participatory_space.allows_steps?
+
+            permissions.all?
           end
 
           private

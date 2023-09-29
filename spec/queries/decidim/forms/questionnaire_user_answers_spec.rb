@@ -6,7 +6,7 @@ describe Decidim::Forms::QuestionnaireUserAnswers do
   subject { described_class.new(questionnaire) }
 
   let(:organization) { create(:organization) }
-  let(:participatory_process) { create(:participatory_process, organization: organization) }
+  let(:participatory_process) { create(:participatory_process, :with_steps, organization: organization) }
 
   let!(:questionnaire) { create(:questionnaire, questionnaire_for: survey) }
   let!(:user1) { create(:user, organization: organization) }
@@ -19,7 +19,12 @@ describe Decidim::Forms::QuestionnaireUserAnswers do
       create(:questionnaire_question, questionnaire: questionnaire, position: 1)
     ]
   end
-  let(:component) { create(:component, manifest_name: "surveys", organization: organization, settings: settings) }
+
+  let(:component) do
+    create(:component, manifest_name: "surveys", participatory_space: participatory_process, organization: organization, settings: settings, step_settings: {
+             participatory_process.active_step.id => { allow_multiple_answers: true }
+           })
+  end
   let!(:survey) { create(:survey, component: component) }
 
   let!(:answers1) { questions.map { |question| create :answer, session_token: :foo, user: user1, questionnaire: questionnaire, question: question } }
