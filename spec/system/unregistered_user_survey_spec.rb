@@ -30,6 +30,9 @@ describe "Answer a survey", type: :system do
 
     before do
       component.update!(
+        settings: {
+          allow_multiple_answers: true
+        },
         step_settings: {
           component.participatory_space.active_step.id => {
             allow_multiple_answers: true,

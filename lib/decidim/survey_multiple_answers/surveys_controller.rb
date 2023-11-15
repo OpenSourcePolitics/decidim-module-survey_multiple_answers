@@ -34,18 +34,6 @@ module Decidim
 
             @session_token ||= tokenize(id || session_id)
           end
-          #
-          # def can_submit_multiple_answers?
-          #   collaborator? && allow_multiple_answers?
-          # end
-          #
-          # def collaborator?
-          #   return false unless current_user
-          #
-          #   current_user.admin? ||
-          #     current_participatory_space.user_roles(:admin).exists?(user: current_user) ||
-          #     current_participatory_space.user_roles(:collaborator).exists?(user: current_user)
-          # end
         end
       end
       # rubocop:enable Metrics/CyclomaticComplexity
