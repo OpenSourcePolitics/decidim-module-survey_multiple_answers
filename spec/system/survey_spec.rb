@@ -50,7 +50,7 @@ describe "Answer a survey", type: :system do
             starts_at: 1.week.ago,
             ends_at: 1.day.from_now,
             allow_multiple_answers: true
-          },
+          }
         )
       end
 
