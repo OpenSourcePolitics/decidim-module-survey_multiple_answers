@@ -48,7 +48,8 @@ describe "Answer a survey", type: :system do
           },
           settings: {
             starts_at: 1.week.ago,
-            ends_at: 1.day.from_now
+            ends_at: 1.day.from_now,
+            allow_multiple_answers: true
           }
         )
       end
