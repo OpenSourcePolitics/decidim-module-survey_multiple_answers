@@ -11,7 +11,7 @@ env:
 
 jobs:
   test-report:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     services:
       postgres:
@@ -32,7 +32,7 @@ jobs:
       RUBY_VERSION: 2.7.5
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
 
@@ -50,7 +50,7 @@ jobs:
           SIMPLECOV: 0
           CODECOV: 0
 
-      - uses: actions/upload-artifact@v2-preview
+      - uses: actions/upload-artifact@@v4
         if: always()
         with:
           name: screenshots
