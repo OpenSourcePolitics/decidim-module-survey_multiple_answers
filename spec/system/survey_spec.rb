@@ -62,7 +62,7 @@ describe "Answer a survey", type: :system do
 
         check "questionnaire_tos_agreement"
 
-        accept_confirm { click_button "Submit" }
+        accept_confirm { click_on "Submit" }
       end
 
       it "allows answering the questionnaire" do
