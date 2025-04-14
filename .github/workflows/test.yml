@@ -98,7 +98,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - run: gem update --system ${{ matrix.ruby }}
+      - run: gem update --system
         name: update rubygems
       - name: Setup Database
         run: bundle exec rake test_app
