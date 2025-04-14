@@ -44,13 +44,49 @@ jobs:
           - 18.17.1
         exclude:
           - gemfile: gemfiles/decidim_0.26.gemfile
-            ruby: [3.0.2, 3.2.2]
+            ruby: 2.7.5
+            node: 18.17.1
+          - gemfile: gemfiles/decidim_0.26.gemfile
+            ruby: 3.0.2
+            node: 16.9.1
+          - gemfile: gemfiles/decidim_0.26.gemfile
+            ruby: 3.0.2
+            node: 18.17.1
+          - gemfile: gemfiles/decidim_0.26.gemfile
+            ruby: 3.2.2
+            node: 16.9.1
+          - gemfile: gemfiles/decidim_0.26.gemfile
+            ruby: 3.2.2
             node: 18.17.1
           - gemfile: gemfiles/decidim_0.27.gemfile
-            ruby: [2.7.5, 3.2.2]
+            ruby: 2.7.5
+            node: 16.9.1
+          - gemfile: gemfiles/decidim_0.27.gemfile
+            ruby: 2.7.5
+            node: 18.17.1
+          - gemfile: gemfiles/decidim_0.27.gemfile
+            ruby: 3.0.2
+            node: 18.17.1
+          - gemfile: gemfiles/decidim_0.27.gemfile
+            ruby: 3.2.2
+            node: 16.9.1
+          - gemfile: gemfiles/decidim_0.27.gemfile
+            ruby: 3.2.2
             node: 18.17.1
           - gemfile: gemfiles/Gemfile
-            ruby: [2.7.5, 3.0.2]
+            ruby: 2.7.5
+            node: 16.9.1
+          - gemfile: gemfiles/Gemfile
+            ruby: 2.7.5
+            node: 18.17.1
+          - gemfile: gemfiles/Gemfile
+            ruby: 3.0.2
+            node: 16.9.1
+          - gemfile: gemfiles/Gemfile
+            ruby: 3.0.2
+            node: 18.17.1
+          - gemfile: gemfiles/Gemfile
+            ruby: 3.2.2
             node: 16.9.1
 
     steps:
