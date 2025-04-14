@@ -6,9 +6,6 @@ on:
       - main
   pull_request:
 
-env:
-  NODE_VERSION: 16.9.1
-
 jobs:
   test-report:
     runs-on: ubuntu-20.04
@@ -30,22 +27,70 @@ jobs:
       DATABASE_HOST: localhost
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
       RUBY_VERSION: ${{ matrix.ruby }}
+      NODE_VERSION: ${{ matrix.node }}
 
     strategy:
       matrix:
         gemfile:
           - gemfiles/decidim_0.26.gemfile
+          - gemfiles/decidim_0.27.gemfile
           - gemfiles/Gemfile
         ruby:
           - 2.7.5
           - 3.0.2
+          - 3.2.2
+        node:
+          - 16.9.1
+          - 18.17.1
         exclude:
           - gemfile: gemfiles/decidim_0.26.gemfile
+            ruby: 2.7.5
+            node: 18.17.1
+          - gemfile: gemfiles/decidim_0.26.gemfile
             ruby: 3.0.2
+            node: 16.9.1
+          - gemfile: gemfiles/decidim_0.26.gemfile
+            ruby: 3.0.2
+            node: 18.17.1
+          - gemfile: gemfiles/decidim_0.26.gemfile
+            ruby: 3.2.2
+            node: 16.9.1
+          - gemfile: gemfiles/decidim_0.26.gemfile
+            ruby: 3.2.2
+            node: 18.17.1
+          - gemfile: gemfiles/decidim_0.27.gemfile
+            ruby: 2.7.5
+            node: 16.9.1
+          - gemfile: gemfiles/decidim_0.27.gemfile
+            ruby: 2.7.5
+            node: 18.17.1
+          - gemfile: gemfiles/decidim_0.27.gemfile
+            ruby: 3.0.2
+            node: 18.17.1
+          - gemfile: gemfiles/decidim_0.27.gemfile
+            ruby: 3.2.2
+            node: 16.9.1
+          - gemfile: gemfiles/decidim_0.27.gemfile
+            ruby: 3.2.2
+            node: 18.17.1
           - gemfile: gemfiles/Gemfile
             ruby: 2.7.5
+            node: 16.9.1
+          - gemfile: gemfiles/Gemfile
+            ruby: 2.7.5
+            node: 18.17.1
+          - gemfile: gemfiles/Gemfile
+            ruby: 3.0.2
+            node: 16.9.1
+          - gemfile: gemfiles/Gemfile
+            ruby: 3.0.2
+            node: 18.17.1
+          - gemfile: gemfiles/Gemfile
+            ruby: 3.2.2
+            node: 16.9.1
+
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
 
@@ -53,7 +98,8 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-
+      - run: gem update uri
+        name: update uri
       - name: Setup Database
         run: bundle exec rake test_app
 
@@ -63,7 +109,7 @@ jobs:
           SIMPLECOV: 1
           CODECOV: 1
 
-      - uses: actions/upload-artifact@v2-preview
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: screenshots

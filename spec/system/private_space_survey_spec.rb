@@ -61,7 +61,7 @@ describe "Private Space Answer a survey", type: :system do
 
             check "questionnaire_tos_agreement"
 
-            accept_confirm { click_button "Submit" }
+            accept_confirm { click_on "Submit" }
 
             within ".success.flash" do
               expect(page).to have_content("successfully")
@@ -96,7 +96,7 @@ describe "Private Space Answer a survey", type: :system do
 
             expect(questionnaire.answers.count).to eq(0)
 
-            accept_confirm { click_button "Submit" }
+            accept_confirm { click_on "Submit" }
 
             expect(questionnaire.answers.count).to eq(1)
 
@@ -111,7 +111,7 @@ describe "Private Space Answer a survey", type: :system do
 
             check "questionnaire_tos_agreement"
 
-            accept_confirm { click_button "Submit" }
+            accept_confirm { click_on "Submit" }
 
             expect(questionnaire.answers.count).to eq(2)
 
