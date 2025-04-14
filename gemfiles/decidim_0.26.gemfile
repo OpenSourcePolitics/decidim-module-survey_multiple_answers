@@ -12,7 +12,7 @@ gem "decidim-survey_multiple_answers", path: ".."
 gem "bootsnap", "~> 1.7"
 gem "faker", "~> 2.14"
 gem "rspec", "~> 3.0"
-gem "nokogiri", "~> 1.15"
+gem "nokogiri", "< 1.18", ">= 1.15"
 
 group :development, :test do
   gem "byebug", "~> 11.0", platform: :mri
