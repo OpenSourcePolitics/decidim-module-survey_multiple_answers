@@ -70,6 +70,15 @@ jobs:
           - gemfile: gemfiles/decidim_0.26.gemfile
             ruby: 3.2.2
             node: 22.14.0
+          - gemfile: gemfiles/decidim_0.26.gemfile
+            ruby: 3.3.4
+            node: 16.9.1
+          - gemfile: gemfiles/decidim_0.26.gemfile
+            ruby: 3.3.4
+            node: 18.17.1
+          - gemfile: gemfiles/decidim_0.26.gemfile
+            ruby: 3.3.4
+            node: 22.14.0
           - gemfile: gemfiles/decidim_0.27.gemfile
             ruby: 2.7.5
             node: 16.9.1
@@ -93,6 +102,48 @@ jobs:
             node: 18.17.1
           - gemfile: gemfiles/decidim_0.27.gemfile
             ruby: 3.2.2
+            node: 22.14.0
+          - gemfile: gemfiles/decidim_0.27.gemfile
+            ruby: 3.3.4
+            node: 16.9.1
+          - gemfile: gemfiles/decidim_0.27.gemfile
+            ruby: 3.3.4
+            node: 18.17.1
+          - gemfile: gemfiles/decidim_0.27.gemfile
+            ruby: 3.3.4
+            node: 22.14.0
+          - gemfile: gemfiles/decidim_0.29.gemfile
+            ruby: 2.7.5
+            node: 16.9.1
+          - gemfile: gemfiles/decidim_0.29.gemfile
+            ruby: 2.7.5
+            node: 18.17.1
+          - gemfile: gemfiles/decidim_0.29.gemfile
+            ruby: 2.7.5
+            node: 22.14.0
+          - gemfile: gemfiles/decidim_0.29.gemfile
+            ruby: 3.0.2
+            node: 16.9.1
+          - gemfile: gemfiles/decidim_0.29.gemfile
+            ruby: 3.0.2
+            node: 18.17.1
+          - gemfile: gemfiles/decidim_0.29.gemfile
+            ruby: 3.0.2
+            node: 22.14.0
+          - gemfile: gemfiles/decidim_0.29.gemfile
+            ruby: 3.2.2
+            node: 16.9.1
+          - gemfile: gemfiles/decidim_0.29.gemfile
+            ruby: 3.2.2
+            node: 22.14.0
+          - gemfile: gemfiles/decidim_0.29.gemfile
+            ruby: 3.3.4
+            node: 16.9.1
+          - gemfile: gemfiles/decidim_0.29.gemfile
+            ruby: 3.3.4
+            node: 18.17.1
+          - gemfile: gemfiles/decidim_0.29.gemfile
+            ruby: 3.3.4
             node: 22.14.0
           - gemfile: gemfiles/Gemfile
             ruby: 2.7.5
