@@ -7,7 +7,7 @@ on:
   pull_request:
 
 env:
-  NODE_VERSION: 16.9.1
+  NODE_VERSION: 22.14.0
 
 jobs:
   test-report:
@@ -28,11 +28,10 @@ jobs:
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
       DATABASE_HOST: localhost
-      BUNDLE_GEMFILE: gemfiles/decidim_0.26.gemfile
-      RUBY_VERSION: 2.7.5
+      RUBY_VERSION: 3.3.4
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
