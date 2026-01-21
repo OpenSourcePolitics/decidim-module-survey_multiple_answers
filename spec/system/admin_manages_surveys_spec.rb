@@ -31,6 +31,7 @@ describe "Admin manages survey component", type: :system do
     switch_to_host(organization.host)
     login_as user, scope: :user
     visit decidim_admin_participatory_processes.components_path(participatory_space)
+    find("button[aria-label='Actions for surveys']").click
     click_link "Configure"
   end
 
