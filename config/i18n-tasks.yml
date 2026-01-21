@@ -5,6 +5,7 @@ locales: [en]
 
 ignore_unused:
   - "decidim.components.survey_multiple_answers.name"
+  - "decidim.components.surveys.settings.*"
 
 ignore_missing:
   - decidim.participatory_processes.scopes.global
