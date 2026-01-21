@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe Decidim::Forms::QuestionnaireUserAnswers do
+describe Decidim::Forms::QuestionnaireUserResponses do
   subject { described_class.new(questionnaire) }
 
   let(:organization) { create(:organization) }
@@ -27,22 +27,22 @@ describe Decidim::Forms::QuestionnaireUserAnswers do
   end
   let!(:survey) { create(:survey, component: component) }
 
-  let!(:answers1) { questions.map { |question| create :answer, session_token: :foo, user: user1, questionnaire: questionnaire, question: question } }
-  let!(:answers2) { questions.map { |question| create :answer, session_token: :bar, user: user1, questionnaire: questionnaire, question: question } }
-  let!(:answers3) { questions.map { |question| create :answer, session_token: :biz, user: user2, questionnaire: questionnaire, question: question } }
+  let!(:responses1) { questions.map { |question| create :response, session_token: :foo, user: user1, questionnaire: questionnaire, question: question } }
+  let!(:responses2) { questions.map { |question| create :response, session_token: :bar, user: user1, questionnaire: questionnaire, question: question } }
+  let!(:responses3) { questions.map { |question| create :response, session_token: :biz, user: user2, questionnaire: questionnaire, question: question } }
 
-  context "when the survey allows multiple answers" do
+  context "when the survey allows multiple responses" do
     let(:settings) { { allow_multiple_answers: true } }
 
     it "returns the user answers for each user without the separators and title-and-descriptions" do
       result = subject.query
 
       expect(result.size).to eq(3)
-      expect(result).to contain_exactly([answers1.last, answers1.first], [answers2.last, answers2.first], [answers3.last, answers3.first])
+      expect(result).to contain_exactly([responses1.last, responses1.first], [responses2.last, responses2.first], [responses3.last, responses3.first])
     end
   end
 
-  context "when the survey does not allow multiple answers" do
+  context "when the survey does not allow multiple responses" do
     let(:settings) { { allow_multiple_answers: false } }
 
     it "returns the user answers for each user without the separators and title-and-descriptions" do
@@ -50,7 +50,7 @@ describe Decidim::Forms::QuestionnaireUserAnswers do
 
       expect(result.size).to eq(2)
 
-      expect(result).to contain_exactly([answers3.last, answers3.first], [answers2.last, answers1.last, answers2.first, answers1.first])
+      expect(result).to contain_exactly([responses3.last, responses3.first], [responses2.last, responses1.last, responses2.first, responses1.first])
     end
   end
 end
