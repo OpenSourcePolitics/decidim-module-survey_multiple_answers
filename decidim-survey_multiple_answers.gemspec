@@ -22,6 +22,8 @@ Gem::Specification.new do |s|
   s.add_dependency "decidim-core", "~> 0.31.0"
   s.add_dependency "decidim-forms", "~> 0.31.0"
   s.add_dependency "decidim-surveys", "~> 0.31.0"
+  # rubocop:disable Gemspec/DevelopmentDependencies
   s.add_development_dependency "decidim-participatory_processes", "~> 0.31.0"
+  # rubocop:enable Gemspec/DevelopmentDependencies
   s.metadata["rubygems_mfa_required"] = "true"
 end
