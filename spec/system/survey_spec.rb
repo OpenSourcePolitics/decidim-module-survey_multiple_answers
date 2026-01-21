@@ -38,7 +38,7 @@ describe "Answer a survey", type: :system do
       let(:last_response) { questionnaire.responses.last }
 
       before do
-        survey.update!(allow_responses: true, allow_unregistered: true,  starts_at: 1.week.ago, ends_at: 1.day.from_now)
+        survey.update!(allow_responses: true, allow_unregistered: true, starts_at: 1.week.ago, ends_at: 1.day.from_now)
         component.update!(
           step_settings: {
             component.participatory_space.active_step.id => {

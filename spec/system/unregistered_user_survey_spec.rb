@@ -41,7 +41,7 @@ describe "Answer a survey", type: :system do
         },
         step_settings: {
           component.participatory_space.active_step.id => {
-            allow_multiple_answers: true,
+            allow_multiple_answers: true
           }
         }
       )

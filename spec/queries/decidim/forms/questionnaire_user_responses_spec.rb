@@ -9,8 +9,8 @@ describe Decidim::Forms::QuestionnaireUserResponses do
   let(:participatory_process) { create(:participatory_process, :with_steps, organization: organization) }
 
   let!(:questionnaire) { create(:questionnaire, questionnaire_for: survey) }
-  let!(:user1) { create(:user, organization: organization) }
-  let!(:user2) { create(:user, organization: organization) }
+  let!(:user_one) { create(:user, organization: organization) }
+  let!(:user_two) { create(:user, organization: organization) }
   let!(:questions) do
     [
       create(:questionnaire_question, questionnaire: questionnaire, position: 3),
@@ -27,9 +27,9 @@ describe Decidim::Forms::QuestionnaireUserResponses do
   end
   let!(:survey) { create(:survey, component: component) }
 
-  let!(:responses1) { questions.map { |question| create :response, session_token: :foo, user: user1, questionnaire: questionnaire, question: question } }
-  let!(:responses2) { questions.map { |question| create :response, session_token: :bar, user: user1, questionnaire: questionnaire, question: question } }
-  let!(:responses3) { questions.map { |question| create :response, session_token: :biz, user: user2, questionnaire: questionnaire, question: question } }
+  let!(:responses_one) { questions.map { |question| create :response, session_token: :foo, user: user_one, questionnaire: questionnaire, question: question } }
+  let!(:responses_two) { questions.map { |question| create :response, session_token: :bar, user: user_one, questionnaire: questionnaire, question: question } }
+  let!(:responses_three) { questions.map { |question| create :response, session_token: :biz, user: user_two, questionnaire: questionnaire, question: question } }
 
   context "when the survey allows multiple responses" do
     let(:settings) { { allow_multiple_answers: true } }
@@ -38,7 +38,7 @@ describe Decidim::Forms::QuestionnaireUserResponses do
       result = subject.query
 
       expect(result.size).to eq(3)
-      expect(result).to contain_exactly([responses1.last, responses1.first], [responses2.last, responses2.first], [responses3.last, responses3.first])
+      expect(result).to contain_exactly([responses_one.last, responses_one.first], [responses_two.last, responses_two.first], [responses_three.last, responses_three.first])
     end
   end
 
@@ -50,7 +50,7 @@ describe Decidim::Forms::QuestionnaireUserResponses do
 
       expect(result.size).to eq(2)
 
-      expect(result).to contain_exactly([responses3.last, responses3.first], [responses2.last, responses1.last, responses2.first, responses1.first])
+      expect(result).to contain_exactly([responses_three.last, responses_three.first], [responses_two.last, responses_one.last, responses_two.first, responses_one.first])
     end
   end
 end
