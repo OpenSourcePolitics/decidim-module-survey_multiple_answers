@@ -38,8 +38,9 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-      - name: Setup Database
+      - name: Create test app
         run: bundle exec rake test_app
+        shell: "bash"
       - run: |
           rm -f ./spec/decidim_dummy_app/app/services/dummy_signature_handler.rb
           rm -f ./spec/decidim_dummy_app/app/services/dummy_sms_mobile_phone_validator.rb
