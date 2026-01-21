@@ -12,7 +12,7 @@ module Decidim
           def responded_by?(user)
             return false if allow_multiple_answers?
 
-            query = user.is_a?(String) ? { session_token: user } : { user: }
+            query = user.is_a?(String) ? { session_token: user } : { user: user }
             responses.where(query).any? if questions.present?
           end
 
