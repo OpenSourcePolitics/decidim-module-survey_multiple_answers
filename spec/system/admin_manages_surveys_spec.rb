@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Admin manages survey compoenent", type: :system do
+describe "Admin manages survey component", type: :system do
   let!(:user) do
     create :user,
            :admin,

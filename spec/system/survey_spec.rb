@@ -33,9 +33,9 @@ describe "Answer a survey", type: :system do
   include_context "with a component"
 
   context "when the survey allow answers" do
-    context "when the survey allows multiple answers" do
-      let(:first_answer) { questionnaire.answers.first }
-      let(:last_answer) { questionnaire.answers.last }
+    context "when the survey allows multiple responses" do
+      let(:first_response) { questionnaire.responses.first }
+      let(:last_response) { questionnaire.responses.last }
 
       before do
         component.update!(
@@ -68,11 +68,11 @@ describe "Answer a survey", type: :system do
       it "allows answering the questionnaire" do
         visit_component
 
-        expect(questionnaire.answers.count).to eq(0)
+        expect(questionnaire.responses.count).to eq(0)
 
         answer_survey
 
-        expect(questionnaire.answers.count).to eq(1)
+        expect(questionnaire.responses.count).to eq(1)
 
         within ".success.flash" do
           expect(page).to have_content("Survey successfully answered")
@@ -80,7 +80,7 @@ describe "Answer a survey", type: :system do
 
         answer_survey
 
-        expect(questionnaire.answers.count).to eq(2)
+        expect(questionnaire.responses.count).to eq(2)
 
         expect(last_answer.session_token).not_to be_empty
         expect(last_answer.ip_hash).not_to be_empty

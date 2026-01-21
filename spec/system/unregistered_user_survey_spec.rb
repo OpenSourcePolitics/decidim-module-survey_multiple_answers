@@ -26,7 +26,7 @@ describe "Answer a survey", type: :system do
   include_context "with a component"
 
   context "when the survey allows multiple answers" do
-    let(:last_answer) { questionnaire.answers.last }
+    let(:last_response) { questionnaire.responses.last }
 
     before do
       component.update!(
@@ -53,11 +53,11 @@ describe "Answer a survey", type: :system do
 
       check "questionnaire_tos_agreement"
 
-      expect(questionnaire.answers.count).to eq(0)
+      expect(questionnaire.responses.count).to eq(0)
 
       accept_confirm { click_on "Submit" }
 
-      expect(questionnaire.answers.count).to eq(1)
+      expect(questionnaire.responses.count).to eq(1)
 
       within ".success.flash" do
         expect(page).to have_content("Survey successfully answered")
@@ -72,7 +72,7 @@ describe "Answer a survey", type: :system do
 
       accept_confirm { click_on "Submit" }
 
-      expect(questionnaire.answers.count).to eq(2)
+      expect(questionnaire.responses.count).to eq(2)
 
       expect(last_answer.session_token).not_to be_empty
       expect(last_answer.ip_hash).not_to be_empty
