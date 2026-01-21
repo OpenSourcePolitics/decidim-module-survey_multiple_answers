@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = ["contact@alecslupu.ro"]
   s.license = "AGPL-3.0"
   s.homepage = "https://github.com/decidim/decidim-module-survey_multiple_answers"
-  s.required_ruby_version = "~> 3.3"
+  s.required_ruby_version = ">= 2.7"
 
   s.name = "decidim-survey_multiple_answers"
   s.summary = "A decidim module that allows you to submit multiple answers to a survey"
