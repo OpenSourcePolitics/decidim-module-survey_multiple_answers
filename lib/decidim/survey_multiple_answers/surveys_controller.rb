@@ -20,7 +20,7 @@ module Decidim
           def visitor_already_answered?
             return false if allow_multiple_answers?
 
-            questionnaire.answered_by?(current_user || tokenize(session[:session_id]))
+            questionnaire.responded_by?(current_user || tokenize(session[:session_id]))
           end
 
           # token is used as a substitute of user_id if unregistered

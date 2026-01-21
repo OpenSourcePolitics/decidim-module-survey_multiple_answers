@@ -6,15 +6,14 @@ module Decidim
       def self.prepended(base)
         base.class_eval do
           def questions_editable?
-            (has_component? && !questionnaire_for.component.published?) || answers.empty?
+            (has_component? && !questionnaire_for.component.published?) || override_edit.presence || responses.empty?
           end
 
-          def answered_by?(user)
+          def responded_by?(user)
             return false if allow_multiple_answers?
 
-            query = user.is_a?(String) ? { session_token: user } : { user: user }
-
-            answers.where(query).any? if questions.present?
+            query = user.is_a?(String) ? { session_token: user } : { user: }
+            responses.where(query).any? if questions.present?
           end
 
           def allow_multiple_answers?
