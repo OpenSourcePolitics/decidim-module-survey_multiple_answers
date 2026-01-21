@@ -7,10 +7,7 @@ on:
   pull_request:
 
 env:
-  RSPEC_FORMAT: "documentation"
   RUBY_VERSION: 3.3.4
-  RAILS_ENV: test
-  NODE_ENV: test
   NODE_VERSION: 22.14.0
 
 jobs:
