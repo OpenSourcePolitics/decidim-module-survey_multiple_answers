@@ -25,8 +25,8 @@ describe "I18n sanity" do
   unless ENV["SKIP_NORMALIZATION"]
     it "is normalized" do
       error_message = "The following files need to be normalized:\n" \
-        "#{non_normalized_paths.map { |path| "  #{path}" }.join("\n")}\n" \
-        "Please run `bundle exec i18n-tasks normalize --locales #{locales}` to fix them"
+                      "#{non_normalized_paths.map { |path| "  #{path}" }.join("\n")}\n" \
+                      "Please run `bundle exec i18n-tasks normalize --locales #{locales}` to fix them"
 
       expect(non_normalized_paths).to be_empty, error_message
     end
@@ -34,7 +34,7 @@ describe "I18n sanity" do
 
   it "does not have inconsistent interpolations" do
     error_message = "#{inconsistent_interpolations.leaves.count} i18n keys have inconsistent interpolations.\n" \
-      "Run `i18n-tasks check-consistent-interpolations' to show them"
+                    "Run `i18n-tasks check-consistent-interpolations' to show them"
     expect(inconsistent_interpolations).to be_empty, error_message
   end
 end
