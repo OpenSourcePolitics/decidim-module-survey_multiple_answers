@@ -1,19 +1,19 @@
 name: "[CI] Test"
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
+on: [push]
 
 env:
+  CI: "true"
+  CODECOV: "true"
   RUBY_VERSION: 3.3.4
   NODE_VERSION: 22.14.0
+  RAILS_ENV: test
 
 jobs:
-  test-report:
+  tests:
+    name: Tests
     runs-on: ubuntu-22.04
-
+    timeout-minutes: 30
     services:
       postgres:
         image: postgres:14
@@ -40,8 +40,6 @@ jobs:
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
           bundler-cache: true
-      - run: gem update uri
-        name: update uri
       - name: Create test app
         run: bundle exec rake test_app
         shell: "bash"
