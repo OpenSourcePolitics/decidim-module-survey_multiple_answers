@@ -4,12 +4,12 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 
-DECIDIM_VERSION = "~> 0.29.0"
+DECIDIM_VERSION = "~> 0.31.0"
 
 gem "decidim", DECIDIM_VERSION
 gem "decidim-admin", DECIDIM_VERSION
 gem "decidim-core", DECIDIM_VERSION
-gem "decidim-survey_multiple_answers", path: ".."
+gem "decidim-survey_multiple_answers", path: "."
 
 gem "bootsnap", "~> 1.7"
 gem "faker", "~> 3.2"

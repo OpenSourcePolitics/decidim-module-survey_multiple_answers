@@ -7,15 +7,14 @@ on:
   pull_request:
 
 env:
-  RUBY_VERSION: 2.7.5
-  NODE_VERSION: 16.9.1
-  BUNDLE_GEMFILE: gemfiles/decidim_0.26.gemfile
+  RUBY_VERSION: 3.3.4
+  NODE_VERSION: 22.14.0
 
 jobs:
   lint-report:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 1
 

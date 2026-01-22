@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = ["contact@alecslupu.ro"]
   s.license = "AGPL-3.0"
   s.homepage = "https://github.com/decidim/decidim-module-survey_multiple_answers"
-  s.required_ruby_version = ">= 2.7"
+  s.required_ruby_version = "~> 3.3"
 
   s.name = "decidim-survey_multiple_answers"
   s.summary = "A decidim module that allows you to submit multiple answers to a survey"
@@ -18,10 +18,12 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,lib}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
 
-  s.add_dependency "decidim-admin", ">= 0.26.0", "< 0.30.0"
-  s.add_dependency "decidim-core", ">= 0.26.0", "< 0.30.0"
-  s.add_dependency "decidim-forms", ">= 0.26.0", "< 0.30.0"
-  s.add_dependency "decidim-surveys", ">= 0.26.0", "< 0.30.0"
-  s.add_development_dependency "decidim-participatory_processes", ">= 0.26.0", "< 0.30.0"
+  s.add_dependency "decidim-admin", "~> 0.31.0"
+  s.add_dependency "decidim-core", "~> 0.31.0"
+  s.add_dependency "decidim-forms", "~> 0.31.0"
+  s.add_dependency "decidim-surveys", "~> 0.31.0"
+  # rubocop:disable Gemspec/DevelopmentDependencies
+  s.add_development_dependency "decidim-participatory_processes", "~> 0.31.0"
+  # rubocop:enable Gemspec/DevelopmentDependencies
   s.metadata["rubygems_mfa_required"] = "true"
 end

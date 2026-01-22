@@ -20,24 +20,28 @@ describe "Answer a survey", type: :system do
     }
   end
   let!(:questionnaire) { create(:questionnaire, title: title, description: description) }
-  let!(:survey) { create(:survey, component: component, questionnaire: questionnaire) }
+  let!(:survey) { create(:survey, :published, component: component, questionnaire: questionnaire) }
   let!(:question) { create(:questionnaire_question, questionnaire: questionnaire, position: 0) }
 
   include_context "with a component"
 
   context "when the survey allows multiple answers" do
-    let(:last_answer) { questionnaire.answers.last }
+    let(:last_response) { questionnaire.responses.last }
 
     before do
+      survey.update!(
+        allow_responses: true,
+        allow_unregistered: true,
+        starts_at: 1.week.ago,
+        ends_at: 1.day.from_now
+      )
       component.update!(
         settings: {
           allow_multiple_answers: true
         },
         step_settings: {
           component.participatory_space.active_step.id => {
-            allow_multiple_answers: true,
-            allow_answers: true,
-            allow_unregistered: true
+            allow_multiple_answers: true
           }
         }
       )
@@ -45,6 +49,7 @@ describe "Answer a survey", type: :system do
 
     it "allows answering the questionnaire" do
       visit_component
+      click_on translated_attribute(questionnaire.title)
 
       expect(page).to have_i18n_content(questionnaire.title)
       expect(page).to have_i18n_content(questionnaire.description)
@@ -53,14 +58,14 @@ describe "Answer a survey", type: :system do
 
       check "questionnaire_tos_agreement"
 
-      expect(questionnaire.answers.count).to eq(0)
+      expect(questionnaire.responses.count).to eq(0)
 
       accept_confirm { click_on "Submit" }
-
-      expect(questionnaire.answers.count).to eq(1)
+      sleep 2
+      expect(questionnaire.responses.reload.count).to eq(1)
 
       within ".success.flash" do
-        expect(page).to have_content("Survey successfully answered")
+        expect(page).to have_content("Survey successfully responded.")
       end
 
       expect(page).to have_i18n_content(questionnaire.title)
@@ -71,11 +76,11 @@ describe "Answer a survey", type: :system do
       check "questionnaire_tos_agreement"
 
       accept_confirm { click_on "Submit" }
+      sleep 2
+      expect(questionnaire.responses.reload.count).to eq(2)
 
-      expect(questionnaire.answers.count).to eq(2)
-
-      expect(last_answer.session_token).not_to be_empty
-      expect(last_answer.ip_hash).not_to be_empty
+      expect(last_response.session_token).not_to be_empty
+      expect(last_response.ip_hash).not_to be_empty
     end
   end
 end

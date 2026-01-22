@@ -8,7 +8,7 @@ describe "Private Space Answer a survey", type: :system do
 
   let(:title) do
     {
-      "en" => "SURVEY'S TITLE",
+      "en" => "Survey's title",
       "ca" => "Títol de l'enquesta'",
       "es" => "Título de la encuesta"
     }
@@ -25,7 +25,7 @@ describe "Private Space Answer a survey", type: :system do
   let!(:another_user) { create(:user, :confirmed, organization: organization) }
   let!(:participatory_space_private_user) { create(:participatory_space_private_user, user: another_user, privatable_to: participatory_space_private) }
   let!(:questionnaire) { create(:questionnaire, title: title, description: description) }
-  let!(:survey) { create(:survey, component: component, questionnaire: questionnaire) }
+  let!(:survey) { create(:survey, :published, :allow_responses, component: component, questionnaire: questionnaire) }
   let!(:question) { create(:questionnaire_question, questionnaire: questionnaire, position: 0) }
 
   let!(:participatory_space) { participatory_space_private }
@@ -34,7 +34,6 @@ describe "Private Space Answer a survey", type: :system do
 
   before do
     switch_to_host(organization.host)
-    component.update!(default_step_settings: { allow_answers: true })
   end
 
   def visit_component
@@ -53,11 +52,12 @@ describe "Private Space Answer a survey", type: :system do
         context "when the survey does not allow multiple answers" do
           it "allows answering the survey" do
             visit_component
+            click_on translated_attribute(questionnaire.title)
 
             expect(page).to have_i18n_content(questionnaire.title)
             expect(page).to have_i18n_content(questionnaire.description)
 
-            fill_in question.body["en"], with: "My first answer"
+            fill_in question.body["en"], with: "My first response"
 
             check "questionnaire_tos_agreement"
 
@@ -67,25 +67,25 @@ describe "Private Space Answer a survey", type: :system do
               expect(page).to have_content("successfully")
             end
 
-            expect(page).to have_content("You have already answered this form.")
+            expect(page).to have_content("You have already responded this form.")
             expect(page).to have_no_i18n_content(question.body)
           end
         end
 
         context "when the survey allows multiple answers" do
-          let(:last_answer) { questionnaire.answers.last }
+          let(:last_response) { questionnaire.responses.last }
 
           before do
             component.update!(
               settings: {
-                allow_multiple_answers: true,
-                allow_answers: true
+                allow_multiple_answers: true
               }
             )
           end
 
           it "allows answering the questionnaire" do
             visit_component
+            click_on translated_attribute(questionnaire.title)
 
             expect(page).to have_i18n_content(questionnaire.title)
             expect(page).to have_i18n_content(questionnaire.description)
@@ -94,14 +94,14 @@ describe "Private Space Answer a survey", type: :system do
 
             check "questionnaire_tos_agreement"
 
-            expect(questionnaire.answers.count).to eq(0)
+            expect(questionnaire.responses.count).to eq(0)
 
             accept_confirm { click_on "Submit" }
-
-            expect(questionnaire.answers.count).to eq(1)
+            sleep 2
+            expect(questionnaire.responses.reload.count).to eq(1)
 
             within ".success.flash" do
-              expect(page).to have_content("Survey successfully answered")
+              expect(page).to have_content("Survey successfully responded.")
             end
 
             expect(page).to have_i18n_content(questionnaire.title)
@@ -112,11 +112,11 @@ describe "Private Space Answer a survey", type: :system do
             check "questionnaire_tos_agreement"
 
             accept_confirm { click_on "Submit" }
+            sleep 2
+            expect(questionnaire.responses.reload.count).to eq(2)
 
-            expect(questionnaire.answers.count).to eq(2)
-
-            expect(last_answer.session_token).not_to be_empty
-            expect(last_answer.ip_hash).not_to be_empty
+            expect(last_response.session_token).not_to be_empty
+            expect(last_response.ip_hash).not_to be_empty
           end
         end
       end

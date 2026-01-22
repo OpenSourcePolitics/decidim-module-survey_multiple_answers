@@ -27,28 +27,25 @@ describe "Answer a survey", type: :system do
     }
   end
   let!(:questionnaire) { create(:questionnaire, title: title, description: description) }
-  let!(:survey) { create(:survey, component: component, questionnaire: questionnaire) }
+  let!(:survey) { create(:survey, :published, component: component, questionnaire: questionnaire) }
   let!(:question) { create(:questionnaire_question, questionnaire: questionnaire, position: 0, description: question_description) }
 
   include_context "with a component"
 
-  context "when the survey allow answers" do
-    context "when the survey allows multiple answers" do
-      let(:first_answer) { questionnaire.answers.first }
-      let(:last_answer) { questionnaire.answers.last }
+  context "when the survey allow responses" do
+    context "when the survey allows multiple responses" do
+      let(:first_response) { questionnaire.responses.first }
+      let(:last_response) { questionnaire.responses.last }
 
       before do
+        survey.update!(allow_responses: true, allow_unregistered: true, starts_at: 1.week.ago, ends_at: 1.day.from_now)
         component.update!(
           step_settings: {
             component.participatory_space.active_step.id => {
-              allow_answers: true,
-              allow_unregistered: true,
               allow_multiple_answers: true
             }
           },
           settings: {
-            starts_at: 1.week.ago,
-            ends_at: 1.day.from_now,
             allow_multiple_answers: true
           }
         )
@@ -67,26 +64,27 @@ describe "Answer a survey", type: :system do
 
       it "allows answering the questionnaire" do
         visit_component
+        click_on translated_attribute(questionnaire.title)
 
-        expect(questionnaire.answers.count).to eq(0)
+        expect(questionnaire.responses.count).to eq(0)
 
         answer_survey
-
-        expect(questionnaire.answers.count).to eq(1)
+        sleep 2
+        expect(questionnaire.responses.reload.count).to eq(1)
 
         within ".success.flash" do
-          expect(page).to have_content("Survey successfully answered")
+          expect(page).to have_content("Survey successfully responded.")
         end
 
         answer_survey
+        sleep 2
+        expect(questionnaire.responses.reload.count).to eq(2)
 
-        expect(questionnaire.answers.count).to eq(2)
+        expect(last_response.session_token).not_to be_empty
+        expect(last_response.ip_hash).not_to be_empty
 
-        expect(last_answer.session_token).not_to be_empty
-        expect(last_answer.ip_hash).not_to be_empty
-
-        expect(first_answer.session_token).not_to eq(last_answer.session_token)
-        expect(first_answer.ip_hash).to eq(last_answer.ip_hash)
+        expect(first_response.session_token).not_to eq(last_response.session_token)
+        expect(first_response.ip_hash).to eq(last_response.ip_hash)
       end
     end
   end
